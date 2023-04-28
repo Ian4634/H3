@@ -73,7 +73,7 @@ void add_word(const char *str)
         strcpy(new_node->str, str);
         return;
     }
-
+    line_len++; // because the space need to be counted from the second line.
     current->next = new_node;
     current = new_node;
     new_node->next = NULL; // since the new node is the last, set its next_node to null
@@ -106,7 +106,9 @@ void write_line(void)
   }
   putchar('\n');
 */
-    line_len += num_words -1; // original code includes the space but i did not.
+    #if Debug
+    printf("extra spaces%d")
+    #endif // Debug
     int extra_spaces, spaces_to_insert, i, j;
 
     extra_spaces = MAX_LINE_LEN - line_len;
