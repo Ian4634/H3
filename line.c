@@ -4,6 +4,7 @@
 #define MAX_LINE_LEN 60
 #define MAX_WORD_LEN 20
 #include<stdlib.h>
+#define Debug 0
 // Each node in the list will store a single word
 
 /******* my variables *******/
@@ -106,18 +107,18 @@ void write_line(void)
   }
   putchar('\n');
 */
-    #if Debug
-    printf("extra spaces%d")
-    #endif // Debug
+
     int extra_spaces, spaces_to_insert, i, j;
 
     extra_spaces = MAX_LINE_LEN - line_len;
     Line *cur_print = head;
     for(;cur_print;cur_print = cur_print->next){
         printf("%s", cur_print->str);
-        if(cur_print->next != NULL){ // not the last word in line, if so, no need spaces
-
+        if(cur_print->next == NULL){ // not the last word in line, if so, no need spaces
         }else{
+            #if Debug
+            printf("in else");
+            #endif // Debug
             spaces_to_insert = extra_spaces / (num_words - 1); // extra_spaces / gaps
             for (j = 1; j <= spaces_to_insert + 1; j++){
                 putchar(' ');
