@@ -85,6 +85,9 @@ void add_word(const char *str)
 
 int space_remaining(void)
 {
+    #if Debug
+    printf(" line len %d", line_len);
+    #endif // Debug
   return MAX_LINE_LEN - line_len;
 }
 
@@ -117,9 +120,14 @@ void write_line(void)
         if(cur_print->next == NULL){ // not the last word in line, if so, no need spaces
         }else{
             #if Debug
-            printf("in else");
+            //printf("in else");
             #endif // Debug
-            spaces_to_insert = extra_spaces / (num_words - 1); // extra_spaces / gaps
+            if((num_words - 1)==0){
+                spaces_to_insert = 1;
+            }else{
+                spaces_to_insert = extra_spaces / (num_words - 1); // extra_spaces / gaps
+            }
+
             for (j = 1; j <= spaces_to_insert + 1; j++){
                 putchar(' ');
                 extra_spaces -= spaces_to_insert;
@@ -139,7 +147,7 @@ void flush_line(void)
     Line *cur_print = head;
     for(;cur_print;cur_print = cur_print->next){
         printf("%s", cur_print->str);
-        if(cur_print->next != NULL){ // not the last word in line, if so, no need spaces
+        if(cur_print->next == NULL){ // not the last word in line, if so, no need spaces
 
         }else{
             printf(" ");
@@ -149,3 +157,4 @@ void flush_line(void)
     putchar('\n');
 
 }
+
